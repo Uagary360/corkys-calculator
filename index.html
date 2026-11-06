@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corky's x Back Porch Sports | Pay-for-Performance Break-Even Calculator</title>
+<meta name="description" content="Enter Corky's real numbers to see how many tracked BPS sales it takes before Back Porch Sports sends a single invoice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="logos">
+    <img src="./assets/bps-logo.png" alt="Back Porch Sports: Sports, Culture, Conversation" class="logo-bps">
+    <span class="divider" aria-hidden="true"></span>
+    <img src="./assets/corkys-logo.png" alt="Corky's Ribs & BBQ" class="logo-corkys">
+  </div>
+  <p class="eyebrow">The Pregame Table <span class="sep">|</span> <span class="nw">Pay-for-Performance</span></p>
+  <h1>If BPS doesn't sell, Corky's doesn't pay.</h1>
+  <p class="lede">Enter Corky's real numbers below. The calculator shows how much tracked BPS sales it takes to cover the $24,000 program, and exactly when BPS would send each invoice.</p>
+</header>
+
+<main class="wrap">
+  <section class="panel inputs" aria-labelledby="in-h">
+    <h2 id="in-h">Your numbers</h2>
+    <p class="hint">Sample numbers are filled in. Replace them with Corky's figures. Nothing you enter is saved or sent anywhere.</p>
+
+    <div class="field">
+      <label for="aov">Average order value</label>
+      <div class="inp prefix"><span>$</span><input id="aov" type="number" inputmode="decimal" min="0" step="1" value="130"></div>
+      <small>Sample based on Corky's prices of $109 to $179.99</small>
+    </div>
+    <div class="field">
+      <label for="food">Food and product cost</label>
+      <div class="inp suffix"><input id="food" type="number" inputmode="decimal" min="0" max="100" step="0.5" value="35"><span>% of order</span></div>
+      <small>BBQ restaurants typically run 30% to 38%</small>
+    </div>
+    <div class="field">
+      <label for="ship">Shipping and cold packaging</label>
+      <div class="inp prefix"><span>$</span><input id="ship" type="number" inputmode="decimal" min="0" step="1" value="30"></div>
+      <small>Per order, after any shipping the customer pays</small>
+    </div>
+    <div class="field">
+      <label for="fees">Payment and processing fees</label>
+      <div class="inp suffix"><input id="fees" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="3"><span>% of order</span></div>
+    </div>
+    <div class="field">
+      <label for="promo">BPS offer cost</label>
+      <div class="inp prefix"><span>$</span><input id="promo" type="number" inputmode="decimal" min="0" step="1" value="5"></div>
+      <small>Per order, for a gift with purchase or bundle value</small>
+    </div>
+    <div class="field">
+      <label for="expected">BPS orders you expect in a year</label>
+      <div class="inp"><input id="expected" type="number" inputmode="numeric" min="0" step="10" value="800"></div>
+      <small>Used only for the "what Corky's keeps" example</small>
+    </div>
+    <button type="button" id="reset" class="btn-reset">Reset to sample numbers</button>
+  </section>
+
+  <section class="results" aria-live="polite">
+    <div class="panel hero-result">
+      <p class="label">Break-even: BPS sales needed to cover the full $24,000</p>
+      <p class="big"><span id="r-orders">527</span> <span class="unit">orders</span></p>
+      <p class="sub"><span id="r-sales">$68,510</span> in tracked sales | about <span id="r-week">11</span> orders a week</p>
+      <div class="stats">
+        <div><span class="k">Profit per order</span><span class="v" id="r-profit">$45.60</span></div>
+        <div><span class="k">Profit margin</span><span class="v" id="r-margin">35.1%</span></div>
+        <div><span class="k">Orders per month</span><span class="v" id="r-month">44</span></div>
+      </div>
+      <p class="warn" id="r-warn" hidden>With these numbers, each order loses money, so no sales level covers the program. Check the costs entered.</p>
+    </div>
+
+    <div class="panel">
+      <h2>When BPS sends an invoice</h2>
+      <p class="hint">BPS bills only when tracked sales reach each milestone. By then, Corky's has already earned more profit from BPS orders than the invoice amount.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th><span class="full">Milestone</span><span class="short">#</span></th><th>Tracked BPS sales</th><th>Corky's profit</th><th>BPS bills</th></tr></thead>
+        <tbody id="ms"></tbody>
+        <tfoot><tr><td colspan="3">Most Corky's ever pays for the year</td><td>$24,000</td></tr></tfoot>
+      </table>
+      </div>
+      <p class="fine">Below the first milestone, Corky's pays $0 and keeps every dollar of profit from BPS orders.</p>
+    </div>
+
+    <div class="panel keeps">
+      <h2>What Corky's keeps</h2>
+      <p class="hint">Example with <span id="k-exp">800</span> tracked BPS orders in a year.</p>
+      <div class="stats three">
+        <div><span class="k">Profit from BPS orders</span><span class="v" id="k-profit">$36,480</span></div>
+        <div><span class="k">Paid to BPS</span><span class="v" id="k-paid">$24,000</span></div>
+        <div class="accent"><span class="k">Corky's keeps</span><span class="v" id="k-net">$12,480</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p><strong>Gary Lendermon</strong> | Back Porch Sports | <a href="mailto:gary@backporchsports.com">gary@backporchsports.com</a> | 901.356.2658</p>
+  <p class="fine">Sample numbers are placeholders, not Corky's actual figures. Final milestones are set together at signing using Corky's real numbers. Draft for discussion, not a signed agreement.</p>
+</footer>
+<script src="./app.js"></script>
+</body>
+</html>
