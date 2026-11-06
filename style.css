@@ -98,3 +98,6 @@ td small.ord{display:block;font-size:12px;color:var(--muted);font-weight:500}
   .eyebrow .nw{display:block}
 }
 @media (max-width:520px){ td{white-space:normal} }
+
+.sub.cushion{margin-top:-10px;font-size:13px}
+td small.ahead{color:#2F6B3A;font-weight:600}

@@ -1,5 +1,5 @@
 (function () {
-  var FEE = 24000, MILESTONES = 4, PER = FEE / MILESTONES;
+  var FEE = 24000, MILESTONES = 4, PER = FEE / MILESTONES, CUSHION = 0.10;
   var SAMPLE = { aov: 130, food: 35, ship: 30, fees: 3, promo: 5, upfront: 5000, expected: 800 };
   var ids = Object.keys(SAMPLE);
   var el = {};
@@ -22,7 +22,7 @@
     var tbody = $('ms');
     tbody.innerHTML = '';
     if (!ok) {
-      ['r-orders', 'r-week', 'r-month'].forEach(function (i) { $(i).textContent = '—'; });
+      ['r-orders', 'r-week', 'r-month', 'r-final'].forEach(function (i) { $(i).textContent = '—'; });
       $('r-sales').textContent = '—';
       tbody.innerHTML = '<tr><td colspan="4">Enter costs that leave a profit on each order.</td></tr>';
       $('k-profit').textContent = usd0.format(Math.max(profit * exp, 0));
@@ -36,16 +36,18 @@
     $('r-sales').textContent = usd0.format(be * aov);
     $('r-month').textContent = num.format(Math.ceil(be / 12));
     $('r-week').textContent = num.format(Math.ceil(be / 52));
+    var target = Math.ceil(be * (1 + CUSHION) - 1e-9);
+    $('r-final').textContent = num.format(target);
     var row0 = document.createElement('tr');
     row0.innerHTML = '<td>Start</td><td>Production fee<small class="ord">due at signing</small></td><td>—</td><td>' + usd0.format(up) + '</td>';
     if (up > 0) tbody.appendChild(row0);
     var thresholds = [];
     for (var m = 1; m <= MILESTONES; m++) {
-      var orders = m === MILESTONES ? be : Math.ceil(be * m / MILESTONES);
+      var orders = m === MILESTONES ? target : Math.ceil(target * m / MILESTONES - 1e-9);
       thresholds.push(orders);
       var tr = document.createElement('tr');
       tr.innerHTML = '<td>' + m + '</td><td>' + usd0.format(orders * aov) + '<small class="ord">about ' + num.format(orders) + ' orders</small></td><td>' +
-        usd0.format(orders * profit) + '</td><td>' + usd0.format(m === 1 ? PER - up : PER) + (m === 1 && up > 0 ? '<small class="ord">after ' + usd0.format(up) + ' credit</small>' : '') + '</td>';
+        usd0.format(orders * profit) + '<small class="ord ahead">ahead by ' + usd0.format(orders * profit - m * PER) + '</small></td><td>' + usd0.format(m === 1 ? PER - up : PER) + (m === 1 && up > 0 ? '<small class="ord">after ' + usd0.format(up) + ' credit</small>' : '') + '</td>';
       tbody.appendChild(tr);
     }
     var reached = thresholds.filter(function (t) { return exp >= t; }).length;
