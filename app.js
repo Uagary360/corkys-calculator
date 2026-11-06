@@ -52,7 +52,7 @@
     }
     var reached = thresholds.filter(function (t) { return exp >= t; }).length;
     var earned = profit * exp, paid = Math.max(reached * PER, up);
-    $('r-risk').textContent = up > 0 ? 'Corky\'s earns back the ' + usd0.format(up) + ' production fee at about ' + num.format(Math.ceil(up / profit - 1e-9)) + ' orders. Below the first milestone, the production fee is the only cost.' : 'Below the first milestone, Corky\'s pays $0 and keeps every dollar of profit from BPS orders.';
+    $('r-risk').textContent = up > 0 ? 'Corky\'s earns back the ' + usd0.format(up) + ' production fee at about ' + num.format(Math.ceil(up / profit - 1e-9)) + ' orders. Below the first milestone, the production fee is the only cost, and BPS refunds it in full if BPS cancels.' : 'Below the first milestone, Corky\'s pays $0 and keeps every dollar of profit from BPS orders.';
     $('k-exp').textContent = num.format(exp);
     $('k-profit').textContent = usd0.format(earned);
     $('k-paid').textContent = usd0.format(paid);
