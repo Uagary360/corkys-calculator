@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Corky's x Back Porch Sports | Pay-for-Performance Break-Even Calculator</title>
-<meta name="description" content="Enter Corky's real numbers to see how many tracked BPS sales it takes before Back Porch Sports sends a single invoice.">
+<meta name="description" content="Enter Corky's real numbers to see the break-even point and when each Back Porch Sports milestone invoice would arrive.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,8 +19,8 @@
     <img src="./assets/corkys-logo.png" alt="Corky's Ribs & BBQ" class="logo-corkys">
   </div>
   <p class="eyebrow">The Pregame Table <span class="sep">|</span> <span class="nw">Pay-for-Performance</span></p>
-  <h1>If BPS doesn't sell, Corky's doesn't pay.</h1>
-  <p class="lede">Enter Corky's real numbers below. The calculator shows how much tracked BPS sales it takes to cover the $24,000 program, and exactly when BPS would send each invoice.</p>
+  <h1>Corky's pays for results, not promises.</h1>
+  <p class="lede">A $5,000 production fee gets the cameras rolling. The rest of the $24,000 is billed only as tracked BPS sales come in. Enter Corky's real numbers to see the break-even point and exactly when each invoice would arrive.</p>
 </header>
 
 <main class="wrap">
@@ -53,6 +53,11 @@
       <small>Per order, for a gift with purchase or bundle value</small>
     </div>
     <div class="field">
+      <label for="upfront">Upfront production fee</label>
+      <div class="inp prefix"><span>$</span><input id="upfront" type="number" inputmode="decimal" min="0" max="6000" step="500" value="5000"></div>
+      <small>Credited in full toward the $24,000, as a prepayment on Milestone 1</small>
+    </div>
+    <div class="field">
       <label for="expected">BPS orders you expect in a year</label>
       <div class="inp"><input id="expected" type="number" inputmode="numeric" min="0" step="10" value="800"></div>
       <small>Used only for the "what Corky's keeps" example</small>
@@ -75,7 +80,7 @@
 
     <div class="panel">
       <h2>When BPS sends an invoice</h2>
-      <p class="hint">BPS bills only when tracked sales reach each milestone. By then, Corky's has already earned more profit from BPS orders than the invoice amount.</p>
+      <p class="hint">After the production fee, BPS bills only when tracked sales reach each milestone. At every milestone, Corky's profit from BPS orders covers everything it has paid so far.</p>
       <div class="table-wrap">
       <table>
         <thead><tr><th><span class="full">Milestone</span><span class="short">#</span></th><th>Tracked BPS sales</th><th>Corky's profit</th><th>BPS bills</th></tr></thead>
@@ -83,7 +88,7 @@
         <tfoot><tr><td colspan="3">Most Corky's ever pays for the year</td><td>$24,000</td></tr></tfoot>
       </table>
       </div>
-      <p class="fine">Below the first milestone, Corky's pays $0 and keeps every dollar of profit from BPS orders.</p>
+      <p class="fine" id="r-risk">Corky's earns back the production fee at about 110 orders. Below the first milestone, the production fee is the only cost.</p>
     </div>
 
     <div class="panel keeps">
